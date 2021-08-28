@@ -1,0 +1,17 @@
+
+.card-img-top {
+    width: 100%;
+    height: 18em;
+    object-fit: cover;
+}
+
+.image-properties {
+    height: 28em
+}
+
+footer {
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
