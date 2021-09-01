@@ -3,10 +3,6 @@ const id = param.get("_id");
 
 const urlProduct = url+id;
 
-let imageElement = document.getElementById("image");
-let nameElement = document.getElementById("name");
-let productPriceElement = document.getElementById("product-price");
-let descriptionElement = document.getElementById("description");
 
 
 let typeOfRowCart = class {
@@ -39,13 +35,15 @@ function getAPIproduct() {
 }
 
 function displayCard(product) {
+    let imageElement = document.getElementById("image");
+    let nameElement = document.getElementById("name");
+    let productPriceElement = document.getElementById("product-price");
+    let descriptionElement = document.getElementById("description");
+    
     imageElement.innerHTML += `<img src="${product.imageUrl}" class="img-fluid img-thumbnail image-properties" alt="${product.name}">`;
     nameElement.innerHTML += `${product.name}`;
     productPriceElement.innerHTML += `${adaptPrice(product.price)}`;
     descriptionElement.innerHTML += `${product.description}`;
-    nameContent = nameElement.innerHTML;
-    console.log(nameContent)
-    ;
 }
 
 function displayOptions(product) {

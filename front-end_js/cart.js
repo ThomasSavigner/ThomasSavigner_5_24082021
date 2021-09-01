@@ -73,7 +73,9 @@
     
     
     function addProductInCart () {
-        let objJson = new typeOfRowCart(nameElement.innerHTML, quantityNumber, productPriceElement.innerHTML);
+        let objJson = new typeOfRowCart(document.getElementById("name").textContent, quantityNumber, document.getElementById("product-price").textContent);
+        console.log(document.getElementById("name").textContent);
+        console.log(document.getElementById("product-price").textContent);
         console.log(objJson);
         let objLinea = JSON.stringify(objJson);
         localStorage.setItem("obj", objLinea);
