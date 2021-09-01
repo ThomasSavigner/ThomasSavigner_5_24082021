@@ -1,7 +1,16 @@
-fetch(url)
-    .then(response => response.json())
-    .then(data => displayProducts(data))
-    .catch(error => alert("Erreur : " + error))
+root();
+
+function root() {
+    getAPIData();
+    iconCart();
+}
+
+function getAPIData() {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => displayProducts(data))
+        .catch(error => alert("Erreur : " + error))
+};
 
 function displayProducts(data) {
     for (product of data) {

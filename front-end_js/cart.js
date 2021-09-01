@@ -1,6 +1,23 @@
 
 // Gestion du Panier
 
+    //  Indication icone header "panier vide / panier rempli" 
+    //  fonction utilisée en page index et product
+    const iconCartEmptyElement = document.getElementById("empty-icon");
+    const iconCartFullElement = document.getElementById("full-icon");
+    const displayEmptyCart = iconCartEmptyElement.classList;
+    const displayFullCart = iconCartFullElement.classList;
+
+    let memory = localStorage.length
+
+    function iconCart() {
+        if (memory >= 1) {
+            y = displayEmptyCart.add("d-none");
+        } else { 
+            x = displayFullCart.add("d-none");
+        }
+    }
+
     //  Format des prix
     //  fonction utilisée en page index et product
     function adaptPrice(priceNumber) {
@@ -15,55 +32,53 @@
     //  module quantité produit
 
         //Définition et affichage du multiple "Quantité"
-        var quantityNumber = 1;
-        var pushQtyBtn= 4;
+        let quantityNumber = 1;
+        
+        function setQuantity() {
+            displayQuantity();
+            adjustQuantity();
+        }
 
         function displayQuantity() {
             const containerQuantity = document.getElementById("quantity-product");
             containerQuantity.innerHTML = quantityNumber;
             };
 
-        displayQuantity();
 
-        
-        //Paramétrage bouton "-"
-        const lessQuantityBtn = document.getElementById("decrement-button");
-        
-        lessQuantityBtn.addEventListener("click", function setLessQuantity() {
-            pushQtyBtn = quantityNumber--;
-            displayQuantity();
-            return pushQtyBtn,console.log(pushQtyBtn);
-        });
+        //Ajuster la quantité
+        function adjustQuantity() {    
 
-        console.log(pushQtyBtn);
+            //Paramétrage bouton "-"
+            const lessQuantityBtn = document.getElementById("decrement-button");
+            
+            lessQuantityBtn.addEventListener("click", function setLessQuantity() {
+                let less = quantityNumber--;
+                displayQuantity();
+            });
 
-        //Paramétrage bouton "+"
-        const addQuantityBtn = document.getElementById("increment-button");
+            //Paramétrage bouton "+"
+            const addQuantityBtn = document.getElementById("increment-button");
 
-        addQuantityBtn.addEventListener("click", function setAddQuantity () {
-            let add = quantityNumber++;
-            displayQuantity();
-        });
-/*
-    //  Ajouter un produit au panier
-    let typeOfRowCart = class {
-        constructor(name, quantity, price) {
-            this.name = name;
-            this.quantity = quantity;
-            this.price = price;
+            addQuantityBtn.addEventListener("click", function setAddQuantity () {
+                let add = quantityNumber++;
+                displayQuantity();
+            });
         }
-    };
 
+    //  Ajouter un produit au panier
     const addCartElement = document.getElementById("addtocart-button");
-
-    addCartElement.addEventListener("click", addProductInCart ());
+    
+    function addToCart() {
+        addCartElement.addEventListener("click", addProductInCart());
+    
     
     function addProductInCart () {
-        let objJson = new typeOfRowCart(namecamera, quantityNumber, document.getElementById("product-price").innerHTML);
+        let objJson = new typeOfRowCart(nameElement.innerHTML, quantityNumber, productPriceElement.innerHTML);
         console.log(objJson);
         let objLinea = JSON.stringify(objJson);
         localStorage.setItem("obj", objLinea);
-
+    };
+}
             /*quantityNumber : "${quantityNumber}",
             price : "${adaptPrice(product.price)"};/*document.getElementById("name").innerHTML, quantityNumber : quantityNumber, price : document.getElementById("product-price").innerHTML};
             
