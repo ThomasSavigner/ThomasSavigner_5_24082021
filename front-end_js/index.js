@@ -10,7 +10,8 @@ function displayProducts(data) {
         cardsList.innerHTML +=      `<div class="card col-12 col-md-6 col-lg-4">
                                         <div class="">
                                             <a href="views/product.html?_id=${product._id}" class="stretched-link" title="Voir ce produit">
-                                            <img src="${product.imageUrl}" class="card-img-top img-fluid img-thumbnail" alt="${product.name}"></a>
+                                                <img src="${product.imageUrl}" class="card-img-top img-fluid img-thumbnail" alt="${product.name}">
+                                            </a>
                                         </div>
                                         <div class="card-body d-flex justify-content-between">
                                             <h5 class="card-title">${product.name}</h5>

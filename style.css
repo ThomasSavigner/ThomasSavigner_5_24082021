@@ -1,12 +1,25 @@
 
+    /* Personnalisation navbar */
+.md-36 {
+    font-size: 36px
+}
+
+.icon-cart-filled {
+    color: rgb(255, 0, 0)
+}
+    /* ----------- */
+
+
 .card-img-top {
     width: 100%;
-    height: 18em;
+    height: 20em;
     object-fit: cover;
 }
 
 .image-properties {
-    height: 28em
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 footer {

@@ -1,62 +1,77 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Orinoco-Caméras</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Orinoco-Caméras</title>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
-              rel="stylesheet" 
-              integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
-              crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-        <link href="../style.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+            rel="stylesheet" 
+            integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+            crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+      <link href="../style.css" rel="stylesheet">
     </head>
     <body>
 
-      <header class="container bg-dark">
-        <nav class="navbar navbar-expand-lg navbar-dark">
-          <a class="navbar-brand" href="#"><span class="material-icons align-bottom">photo_camera</span> Orinoco</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarList"
-                  aria-controls="navbarList" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarList">
-            <div class="navbar-nav">
-              <a class="nav-item nav-link" href="../index.html"><span class="material-icons align-bottom">menu_book</span> Catalogue</a>
-              <a class="nav-item nav-link" href="#"><span class="material-icons align-bottom">shopping_cart</span></a> 
+      <header class="container sticky-top bg-dark">
+        <nav class="navbar navbar-dark">
+          <a class="navbar-brand" href="#"><span class="material-icons md-36 align-bottom">photo_camera</span>&emsp;Orinoco</a>
+          <div class="">
+            <div class="navbar-nav flex-row">
+              <a class="nav-item nav-link active" href="../index.html"><span class="material-icons md-36">menu_book</span></a>
+              <span>&emsp;&emsp;</span>
+              <a class="nav-item nav-link" href="#"><span class="material-icons md-36">shopping_cart</span></a>
+              <a class="nav-item nav-link" href="#"><span class="material-icons icon-cart-filled md-36">add_shopping_cart</span></a>
+              <span>&emsp;</span> 
             </div>
           </div>
         </nav>
       </header>
 
       <main class="container">
-				
-                <div class="card col-md-7">
-                  <div id="image" class="img-product"></div>
-                  <div class="card-body">
-                      <div class="d-flex justify-content-around">
-                        <h5 id="name" class="card-title"></h5>
-                        <span id="product-price"></span></br>
-                      </div>
-                      <p id="description" class="card-text"></p></br>
-                      <div class="d-flex justify-content-around">
-                        <p>Choisissez votre lentille:</p>
-                        <div id="options"></div>
-                      </div>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-around border border-dark ">
-                  <div>Quantité:
-                    <button type="button" id="decrement-button" class="btn btn-success btn-lg" title="diminuer la quantité">-</button>
-                    <span id="quantity-product" class="h5 align-middle"></span>
-                    <button type="button" id="increment-button" class="btn btn-success btn-lg" title="augmenter la quantité">+</button>
-                  </div>
-                  <div>
-                    <button type="button" id="addtocart-button" class="btn btn-warning btn-lg">Ajouter au panier</button>
-                  </div>
-                </div>
-
+        <div class="row">
+          <div class="card col-md-6">
+            <div id="image" class="img-product"></div>
+            <div class="card-body border border-dark m-1">
+                <div class="d-flex justify-content-between">
+                  <h5 id="name" class="card-title"></h5>
+                  <span id="product-price"></span></br>
+                </div></br>
+                <p id="description" class="card-text"></p></br>
+            </div>
+          </div>
+          <div class="col-md-5 h-100">
+            <div class="d-flex flex-column justify-content-center h-25 border border-dark mx-1 my-5 p-1">
+              <label for="options" class="text-center">Choississez votre lentille:&emsp;</label>
+              <select name="lenses" id="options">
+                <option value="">--- Please select</option>
+              </select>
+            </div>
+            <div class="d-flex flex-column align-items-center border border-dark m-3">
+              </br>
+              <div class="">
+                <span>Quantité:&emsp;</span>
+                <button type="button" id="decrement-button" class="btn btn-success btn-sm" title="diminuer la quantité">-</button>
+                <span id="quantity-product" class="h5 align-middle m-3 p-1 border border-2"></span>
+                <button type="button" id="increment-button" class="btn btn-success btn-sm" title="augmenter la quantité">+</button>
+              </div></br>
+              <div class="d-flex flex-column">
+                  <button type="button" id="addtocart-button" class="btn btn-warning btn-sm">Ajouter au panier</button>
+                </br>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mx-3 my-5 border border-dark">
+                <button class="btn btn-sm btn-info m-5">Order - Cart</button></br>
+            </div>
+          </div>
+          <div class="d-none col-md-1 bg-warning border border-2 border-warning p-1 my-1"></div>
+          <div class="d-none d-md-block col-md-1 d-flex flex-column align-items-center border border-3 border-warning p-1 my-1">
+            <h6 class="text-center bg-warning">Panier</h6>
+            <div id="cart"></div>
+          </div>  
+        </div>
+      
       </main>
       
       <footer class="container bg-dark text-light text-center">Orinoco®</footer>
