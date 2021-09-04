@@ -22,7 +22,7 @@
               <a class="nav-item nav-link active" href="../index.html"><span class="material-icons md-36">menu_book</span></a>
               <span>&emsp;&emsp;</span>
               <a id="empty-icon" class="nav-item nav-link" href="#"><span class="material-icons md-36">shopping_cart</span></a>
-              <a id="full-icon" class="nav-item nav-link" href="#"><span class="material-icons icon-cart-filled md-36">add_shopping_cart</span></a>
+              <a id="full-icon" class="nav-item nav-link d-none" href="#"><span class="material-icons icon-cart-filled md-36">add_shopping_cart</span></a>
               <span>&emsp;</span> 
             </div>
           </div>
@@ -32,7 +32,10 @@
       <main class="container">
         <div class="row">
           <div class="card col-md-6">
-            <div id="image" class="img-product"></div>
+            <div class="img-product">
+              <img id="image" src="" class="img-fluid img-thumbnail image-properties" 
+              alt="Appareil photo vintage ">
+            </div>
             <div class="card-body border border-dark m-1">
                 <div class="d-flex justify-content-between">
                   <h5 id="name" class="card-title"></h5>
@@ -53,7 +56,7 @@
               <div class="">
                 <span>Quantité:&emsp;</span>
                 <button type="button" id="decrement-button" class="btn btn-success btn-sm" title="diminuer la quantité">-</button>
-                <span id="quantity-product" class="h5 align-middle m-3 p-1 border border-2"></span>
+                <span id="quantity-product" class="h5 align-middle m-3 p-2 border border-2"></span>
                 <button type="button" id="increment-button" class="btn btn-success btn-sm" title="augmenter la quantité">+</button>
               </div></br>
               <div class="d-flex flex-column">
