@@ -1,11 +1,8 @@
+displayPreviewCart();
 
 getAPIproduct();
 
 function getAPIproduct() {
-    const param = new URLSearchParams(document.location.search.substring(1));
-    const id = param.get("_id");
-
-    const urlProduct = url+id;
     
     fetch(urlProduct)
         .then(response => response.json())
@@ -48,7 +45,8 @@ addCartElement.addEventListener("click", function() {
         nameProduct : document.getElementById("name").textContent,
         quantityProduct : quantityNumber,
         priceProduct : document.getElementById("product-price").textContent,
-        imageProduct : document.getElementById("image").src
+        imageProduct : document.getElementById("image").src,
+        urlProduct : idUrl,
     };
 
     let cartContentEmpty = [];
@@ -66,22 +64,25 @@ addCartElement.addEventListener("click", function() {
 
             let objLinea = JSON.stringify(cartContentFull);
             localStorage.setItem("cart", objLinea);
-            
+            displayPreviewCart();
         } else if (localStorage.getItem("cart") !== null 
                     && 
                     cartContentFull.find(cart => cart.nameProduct === itemCart.nameProduct) == undefined) {
             cartContentFull.push(itemCart);
             let objLinea = JSON.stringify(cartContentFull);
             localStorage.setItem("cart", objLinea);
-
+            displayPreviewCart();
         } else {
             cartContentEmpty.push(itemCart);
             let objLinea = JSON.stringify(cartContentEmpty);
             localStorage.setItem("cart", objLinea);
             iconCart();
+            displayPreviewCart();
         }
     })   
 ;
+
+
 
 /*Module Quantité*/
 

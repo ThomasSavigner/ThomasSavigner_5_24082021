@@ -12,6 +12,9 @@
                 if (localStorage.getItem("cart") !== null){
                 displayEmptyCart.add("d-none");
                 displayFullCart.remove("d-none");
+                } else {
+                    displayEmptyCart.remove("d-none");
+                    displayFullCart.add("d-none");
                 }
             }
 
@@ -46,6 +49,11 @@ function setQuantity() {
         
         lessQuantityBtn.addEventListener("click", function() {
             let less = quantityNumber--;
+
+            if (quantityNumber < 1) {
+                quantityNumber = 1
+            }
+
             displayQuantity();
         });
 
@@ -58,19 +66,65 @@ function setQuantity() {
         });
     }
 
-/*
-//  Affichage du contenu panier
-const cartElement = document.getElementById("cart");
+//  Preview Panier page product
+function displayPreviewCart() {
+    
+    const cartElement = document.getElementById("cart");
 
-function displayCart () {
-    if (localStorage.length = 0) {
-        cartElement.innerHTML += `Votre panier est vide`;
+    if (localStorage.getItem("cart") !== null) {
+
+        document.getElementById("nopreview").classList.remove("d-md-block");
+        document.getElementById("preview").classList.add("d-md-block");
+
+        const cartContentFull = JSON.parse(localStorage.getItem("cart"));
+
+        let cartProduct = [];
+        
+        for (let i =0; i < cartContentFull.length; i++) {
+    
+            cartProduct[i]=
+                            `
+                            <a href="product.html?_id=${cartContentFull[i].urlProduct}" class="link-cart-item" title="Revoir le ${cartContentFull[i].nameProduct}">
+                            <div class="d-flex flex-column align-items-center">
+                                <div>
+                                    <div class="quantity-selected">${cartContentFull[i].quantityProduct}</div>
+                                </div>
+                                <img src="${cartContentFull[i].imageProduct}" class="w-100 border"/>
+                            </div>
+                            </a>
+                            
+                            `
+                            ;
+        };
+
+        let concatCartArray = cartProduct.join("");
+        
+        cartElement.innerHTML = concatCartArray;
+
+        let clearCartButton =    `
+                                <div class="d-flex justify-content-center my-4">
+                                    <button id="clearcart" class="btn btn-warning" title="Vider votre panier">
+                                        <span class="material-icons text-dark">
+                                            remove_shopping_cart
+                                        </span>
+                                    </button>
+                                </div>
+                                `
+                      
+        document.getElementById("clear-out-button").innerHTML = clearCartButton;
+
+        /* Bouton "vider le panier" */
+
+        let clearButtonElement = document.getElementById("clearcart");
+
+        clearButtonElement.addEventListener("click", function() {
+            localStorage.clear();
+            iconCart();
+            displayPreviewCart();
+        });
+    
     } else {
-        for (line of cart) {
-            let objLinea = localStorage.getItem("obj");
-            let objJson = JSON.parse(objLinea);
-            cartElement.innerHTML = "le panier est plein"
+        document.getElementById("nopreview").classList.add("d-md-block");
+        document.getElementById("preview").classList.remove("d-md-block");
     }
-};
-displayCart();
-*/
+}
