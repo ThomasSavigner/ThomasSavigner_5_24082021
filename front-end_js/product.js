@@ -79,8 +79,14 @@ addCartElement.addEventListener("click", function() {
             iconCart();
             displayPreviewCart();
         }
-    })   
-;
+    quantityNumber = 1;
+    setQuantity()
+    });
+
+    
+
+
+
 
 
 

@@ -53,7 +53,6 @@ function setQuantity() {
             if (quantityNumber < 1) {
                 quantityNumber = 1
             }
-
             displayQuantity();
         });
 
@@ -89,7 +88,7 @@ function displayPreviewCart() {
                                 <div>
                                     <div class="quantity-selected">${cartContentFull[i].quantityProduct}</div>
                                 </div>
-                                <img src="${cartContentFull[i].imageProduct}" class="w-100 border"/>
+                                <img src="${cartContentFull[i].imageProduct}" class="image-cover border"/>
                             </div>
                             </a>
                             
@@ -101,10 +100,12 @@ function displayPreviewCart() {
         
         cartElement.innerHTML = concatCartArray;
 
+        /* Bouton "vider le panier" */
+        
         let clearCartButton =    `
                                 <div class="d-flex justify-content-center my-4">
-                                    <button id="clearcart" class="btn btn-warning" title="Vider votre panier">
-                                        <span class="material-icons text-dark">
+                                    <button id="clearcart" class="btn btn-sm btn-warning border border-dark border-3 hover-shadow" title="Vider votre panier">
+                                        <span class="material-icons text-dark clearcartbutton">
                                             remove_shopping_cart
                                         </span>
                                     </button>
@@ -112,8 +113,6 @@ function displayPreviewCart() {
                                 `
                       
         document.getElementById("clear-out-button").innerHTML = clearCartButton;
-
-        /* Bouton "vider le panier" */
 
         let clearButtonElement = document.getElementById("clearcart");
 
