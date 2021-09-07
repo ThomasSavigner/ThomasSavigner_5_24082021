@@ -80,19 +80,13 @@ addCartElement.addEventListener("click", function() {
             displayPreviewCart();
         }
     quantityNumber = 1;
-    setQuantity()
+    displayQuantity();
     });
 
     
-
-
-
-
-
-
 /*Module Quantité*/
 
 let quantityNumber = 1;
 
-setQuantity();
-
+displayQuantity();
+adjustQuantity();

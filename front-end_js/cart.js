@@ -30,11 +30,6 @@ function adaptPrice(priceNumber) {
     }
 
 //Définition fonction module "Quantité"
-function setQuantity() {
-    displayQuantity();
-    adjustQuantity();
-}
-
     //Affichage de la valeur
     function displayQuantity() {
         const containerQuantity = document.getElementById("quantity-product");
