@@ -15,14 +15,14 @@ function getAPIproduct() {
 }
 
 function displayCard(product) {
-    let imageElement = document.getElementById("image");
+    let imageElement = document.getElementById("img-product");
     let nameElement = document.getElementById("name");
     let productPriceElement = document.getElementById("product-price");
     let descriptionElement = document.getElementById("description");
     
-    imageElement.src = `${product.imageUrl}`;
-    imageElement.alt += `${product.name}`;
-    nameElement.innerHTML += `${product.name}`;
+    imageElement.innerHTML = `<img id="image" src="${product.imageUrl}" class="img-fluid img-thumbnail image-properties"
+                                alt="Appareil photo vintage ${product.name}">`;
+    nameElement.innerHTML += `<h5 class="card-title">${product.name}</h5>`;
     productPriceElement.innerHTML += `${adaptPrice(product.price)}`;
     descriptionElement.innerHTML += `${product.description}`;
 }

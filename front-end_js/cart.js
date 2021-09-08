@@ -122,3 +122,19 @@ function displayPreviewCart() {
         document.getElementById("preview").classList.remove("d-md-block");
     }
 }
+
+//  instructions pour calculer le total du panier   
+function arithmetic() {
+    //  Calcul total chaque ligne
+    for (let i=0; i < cartContent.length; i++) {
+        
+        let priceFormat= (cartContent[i].priceProduct).replace('€', '');
+        let thePriceProduct = parseFloat(priceFormat.replace(/\s/g,''));
+
+        sumProductLine[i] = thePriceProduct*(cartContent[i].quantityProduct);
+    }
+        
+    //  Total des lignes
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    cartTotal = sumProductLine.reduce(reducer);
+}
