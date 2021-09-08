@@ -41,10 +41,17 @@ const addCartElement = document.getElementById("addtocart-button");
 
 addCartElement.addEventListener("click", function() {
     
+    // on récupère le prix affiché comme valeur de variable string au format monétaire
+    // on change du type de string à number
+    let priceElement = document.getElementById("product-price").textContent;
+    let priceStore = parseFloat(priceElement.replace('€', '').replace(/\s/g,''));
+
+
+
     let itemCart = {
         nameProduct : document.getElementById("name").textContent,
         quantityProduct : quantityNumber,
-        priceProduct : document.getElementById("product-price").textContent,
+        priceProduct : priceStore,
         imageProduct : document.getElementById("image").src,
         urlProduct : idUrl,
     };

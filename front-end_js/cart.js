@@ -19,7 +19,7 @@
             }
 
 //  Format des prix
-//  fonction utilisée en page index et product
+//  fonction utilisée en page index et product pour l'affichage
 function adaptPrice(priceNumber) {
     let price = Intl.NumberFormat("fr-FR", {
             style: "currency",
@@ -28,8 +28,18 @@ function adaptPrice(priceNumber) {
         }).format(`${priceNumber}` / 100);
         return price;
     }
+//fonction utilisée en page order pour l'affichage
+function loadPrice(priceNumber) {
+    let price = Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+    }).format(`${priceNumber}`);
+    return price;
+}
 
-//Définition fonction module "Quantité"
+
+//Définition fonction module "Quantité" page product
     //Affichage de la valeur
     function displayQuantity() {
         const containerQuantity = document.getElementById("quantity-product");
@@ -123,18 +133,33 @@ function displayPreviewCart() {
     }
 }
 
-//  instructions pour calculer le total du panier   
+//  instructions pour calculer le total du panier en page order 
 function arithmetic() {
     //  Calcul total chaque ligne
     for (let i=0; i < cartContent.length; i++) {
         
-        let priceFormat= (cartContent[i].priceProduct).replace('€', '');
-        let thePriceProduct = parseFloat(priceFormat.replace(/\s/g,''));
+        //let priceFormat= (cartContent[i].priceProduct).replace('€', '');
+        //let thePriceProduct = parseFloat(priceFormat.replace(/\s/g,''));
+        
+        
 
-        sumProductLine[i] = thePriceProduct*(cartContent[i].quantityProduct);
+        sumProductLine[i] = (cartContent[i].priceProduct)*(cartContent[i].quantityProduct);
     }
         
     //  Total des lignes
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     cartTotal = sumProductLine.reduce(reducer);
+}
+
+
+
+//Mise à jour du Panier page order
+
+function displayAllQuantity() {
+    
+    for (i=0; i < cartContent.length; i++) {
+        document.getElementById("quantity-product"+i).innerHTML = cartContent[i].quantityProduct;
+        console.log(document.getElementById("quantity-product"+i).innerHTML);
+    }
+    
 }
