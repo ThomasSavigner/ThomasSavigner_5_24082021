@@ -140,8 +140,6 @@ function arithmetic() {
         
         //let priceFormat= (cartContent[i].priceProduct).replace('€', '');
         //let thePriceProduct = parseFloat(priceFormat.replace(/\s/g,''));
-        
-        
 
         sumProductLine[i] = (cartContent[i].priceProduct)*(cartContent[i].quantityProduct);
     }
@@ -151,15 +149,3 @@ function arithmetic() {
     cartTotal = sumProductLine.reduce(reducer);
 }
 
-
-
-//Mise à jour du Panier page order
-
-function displayAllQuantity() {
-    
-    for (i=0; i < cartContent.length; i++) {
-        document.getElementById("quantity-product"+i).innerHTML = cartContent[i].quantityProduct;
-        console.log(document.getElementById("quantity-product"+i).innerHTML);
-    }
-    
-}
