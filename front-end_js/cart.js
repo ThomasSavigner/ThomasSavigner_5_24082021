@@ -135,12 +135,9 @@ function displayPreviewCart() {
 
 //  instructions pour calculer le total du panier en page order 
 function arithmetic() {
+  
     //  Calcul total chaque ligne
     for (let i=0; i < cartContent.length; i++) {
-        
-        //let priceFormat= (cartContent[i].priceProduct).replace('€', '');
-        //let thePriceProduct = parseFloat(priceFormat.replace(/\s/g,''));
-
         sumProductLine[i] = (cartContent[i].priceProduct)*(cartContent[i].quantityProduct);
     }
         
