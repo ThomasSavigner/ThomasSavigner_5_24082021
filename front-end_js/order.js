@@ -1,106 +1,148 @@
 //  Array "contenu Panier" sur localStorage
 let cartContent = JSON.parse(localStorage.getItem("cart"));
-//  Total du panier
-const sumProductLine = [];
-let cartTotal;
 
 
+// Calcul du montant du panier
+    arithmetic();
 
-//Chargement du panier
+// Chargement du panier
+    // Création du contenu HTML avec les données de chaque produit du panier
+    const itemsCart = [];
 
-arithmetic();
-    
-//      Création du contenu HTML avec les données de chaque produit du panier
-const itemsCart = [];
-
-for (let i=0; i < cartContent.length; i++) {
-    itemsCart[i] =   `
-                    <div class="col-12 d-flex justify-content-between mt-3">
-                        <div id="imageitem${i}" class="w-25"><img src="${cartContent[i].imageProduct}" alt="Appareil photo vintage ${cartContent[i].nameProduct}" class="cart-order-img"/></div>
-                        <div id="nameitem${i}" class="w-25">${cartContent[i].nameProduct}</div>
-                        <div id="priceitem${i}" class="w-25">${loadPrice(cartContent[i].priceProduct)}</div>
-                        <div class="d-flex">
-                            <button id="decrement-button${i}" type="button" class="btn btn-success btn-sm border border-muted border-3 hover-shadow shadow" title="diminuer la quantité">-</button>
-                            <span id="quantity-product${i}" class="align-middle m-1 p-1 border border-2">${cartContent[i].quantityProduct}</span>
-                            <button id="increment-button${i}" type="button" class="btn btn-success btn-sm border border-muted border-3 hover-shadow shadow" title="augmenter la quantité">+</button>
+    for (let i=0; i < cartContent.length; i++) {
+        itemsCart[i] =   `
+                        <div id="lineproduct${i}"class="col-12 d-flex justify-content-between align-items-center mt-3">
+                            <a href="product.html?_id=${cartContent[i].urlProduct}" title="Retourner sur la fiche du ${cartContent[i].nameProduct}" class="d-flex justify-content-between align-items-center w-50 text-decoration-none text-dark">
+                                <div id="imageitem${i}" class="w-50"><img id="img${i}"" src="${cartContent[i].imageProduct}" alt="Appareil photo vintage ${cartContent[i].nameProduct}" class="cart-order-img"/></div>
+                                <div id="nameitem${i}" class="w-50 mx-3">${cartContent[i].nameProduct}</div>
+                            </a>
+                            <div id="priceitem${i}" class="w-25 text-center">${loadPrice(cartContent[i].priceProduct)}</div>
+                            <div class="d-flex w-25 justify-content-center">
+                                <button id="decrement-button${i}" type="button" class="btn btn-success btn-sm border border-muted border-3 hover-shadow shadow" title="diminuer la quantité">-</button>
+                                <span id="quantity-product${i}" class="align-middle m-1 p-1 border border-2 w-25 text-center">${cartContent[i].quantityProduct}</span>
+                                <button id="increment-button${i}" type="button" class="btn btn-success btn-sm border border-muted border-3 hover-shadow shadow" title="augmenter la quantité">+</button>
+                            </div>
+                            <div id="totalproduct${i}" class="w-25 text-end mx-3">${loadPrice(sumProductLine[i])}</div>
+                            <button id="deleteitem${i}" type="button" class="btn btn-warning btn-sm border border-dark border-3 hover-shadow shadow"><span class="material-icons">delete_forever</span></button>
                         </div>
-                        <div id="totalproduct${i}" class="">${loadPrice(sumProductLine[i])}</div>
-                    </div>
-                    ` 
-}
+                        ` 
+    }
 
-//       Injection du contenu dans le DOM
-let concatItemsCart = itemsCart.join("");
+    // Injection du contenu dans le DOM
+    let concatItemsCart = itemsCart.join("");
 
-const cartContentElement = document.getElementById("cartlistproducts");
-cartContentElement.innerHTML = concatItemsCart;
+    const cartContentElement = document.getElementById("cartlistproducts");
+    cartContentElement.innerHTML = concatItemsCart;
 
-document.getElementById("sumcolumn").innerHTML = loadPrice(cartTotal);
+    document.getElementById("sumcolumn").innerHTML = loadPrice(cartTotal);
 
 
-//Modification Panier
 
-//Pose des écouteurs click-button modif quantitéProduct stockée
-for (i=0; i < cartContent.length; i++) {
-    // On reprend la structure d'un élément du panier stocké en localStorage et dont on va modifier la quantité
-    //Modélisation
-    let itemCart = {
-        nameProduct : document.getElementById("nameitem"+i).textContent,
-        quantityProduct : document.getElementById("quantity-product"+i).innerHTML,
-        priceProduct : cartContent[i].priceProduct,
-        imageProduct : document.getElementById("imageitem"+i).src,
-        urlProduct : cartContent[i].urlProduct,
-    };
-    
-    //Paramétrage bouton "-"
-    const lessQuantityBtn = document.getElementById("decrement-button"+ i);
-    
-    let quantityStored = cartContent[i].quantityProduct;
+// Modification Panier
+    /* On créé un tableau de référence du panier sur laquelle on se base pour 
+       les liaisons élément / eventListener après suppression d'une ligne du panier */
+    let tempCart =[];
 
-    lessQuantityBtn.addEventListener('click', function() {
+    //Pose des écouteurs click-button modif quantitéProduct stockée
+    for (i=0; i < cartContent.length; i++) {
+
+        // On reprend la structure d'un élément du panier stocké en localStorage et dont on va modifier la quantité
+        // Modélisation
+        let itemCart = {
+            nameProduct : document.getElementById("nameitem"+i).innerHTML,
+            quantityProduct : Number(document.getElementById("quantity-product"+i).innerHTML),
+            priceProduct : cartContent[i].priceProduct,
+            imageProduct : document.getElementById("img"+i).src,
+            urlProduct : cartContent[i].urlProduct,
+        };
+
         
-        quantityStored--;
+        tempCart[i] = itemCart;
         
-        if (quantityStored < 1) { quantityStored = 1 }
-        // On met le panier à jour en cherchant d'abord l'index de la ligne du produit dans le panier
-        let indexItem = cartContent.indexOf(cartContent.find( cart => cart.nameProduct === itemCart.nameProduct));
-        // On affecte à la ligne correspondante la quantité modifiée
-        cartContent[indexItem].quantityProduct = quantityStored;
-        // On renvoit le panier mis à jour
-        let objLinea = JSON.stringify(cartContent);
-        localStorage.setItem("cart", objLinea);            
-        // On ventile les données modifiées dans le DOM
-        document.getElementById("quantity-product"+indexItem).innerHTML = cartContent[indexItem].quantityProduct;
+        //Paramétrage bouton "-"
+        const lessQuantityBtn = document.getElementById("decrement-button"+ i);
         
-        arithmetic();
+        let quantityStored = itemCart.quantityProduct;
 
-        document.getElementById("totalproduct"+indexItem).innerHTML = loadPrice(sumProductLine[indexItem]);
-        document.getElementById("sumcolumn").innerHTML = loadPrice(cartTotal);
-    });
+        lessQuantityBtn.addEventListener('click', function() {
+            
+            quantityStored--;
+                
+            if (quantityStored < 1) { quantityStored = 1 }
+
+            // On met le panier à jour en cherchant d'abord l'index de la ligne du produit dans le panier
+            let indexItem = cartContent.indexOf(cartContent.find( cart => cart.nameProduct === itemCart.nameProduct));
+            
+            // On affecte à la ligne correspondante la quantité modifiée
+            cartContent[indexItem].quantityProduct = quantityStored;
+
+            // On renvoit le panier mis à jour
+            let objLinea = JSON.stringify(cartContent);
+            localStorage.setItem("cart", objLinea);            
+            
+            // On ventile les données modifiées dans le DOM
+            
+                arithmetic();
+
+                // On cherche la ligne correspondante dans le tableau de référence pour modifier le bon élément du DOM
+                let tempIndex = tempCart.indexOf(tempCart.find( cart => cart.nameProduct === itemCart.nameProduct));
+
+                document.getElementById("quantity-product"+tempIndex).innerHTML = quantityStored;
+                document.getElementById("totalproduct"+tempIndex).innerHTML = loadPrice(sumProductLine[indexItem]);
+                document.getElementById("sumcolumn").innerHTML = loadPrice(cartTotal);
+        });
 
 
-    //Paramétrage bouton "+"
-    const addQuantityBtn = document.getElementById("increment-button"+ i);
+        //Paramétrage bouton "+"
+        const addQuantityBtn = document.getElementById("increment-button"+ i);
 
-    addQuantityBtn.addEventListener('click', function() {
-       
-        quantityStored++;
-
-        let indexItem = cartContent.indexOf(cartContent.find( cart => cart.nameProduct === itemCart.nameProduct));
-        cartContent[indexItem].quantityProduct = quantityStored;
+        addQuantityBtn.addEventListener('click', function() {
         
-        let objLinea = JSON.stringify(cartContent);
-        localStorage.setItem("cart", objLinea);
+            quantityStored++;
+            
+            let indexItem = cartContent.indexOf(cartContent.find( cart => cart.nameProduct === itemCart.nameProduct));
+            cartContent[indexItem].quantityProduct = quantityStored;
+            
+            let objLinea = JSON.stringify(cartContent);
+            localStorage.setItem("cart", objLinea);
+
+            arithmetic();
+            let tempIndex = tempCart.indexOf(tempCart.find( cart => cart.nameProduct === itemCart.nameProduct));
+            document.getElementById("quantity-product"+tempIndex).innerHTML = quantityStored;
+            document.getElementById("totalproduct"+tempIndex).innerHTML = loadPrice(sumProductLine[indexItem]);
+            document.getElementById("sumcolumn").innerHTML = loadPrice(cartTotal);
         
-        document.getElementById("quantity-product"+indexItem).innerHTML = cartContent[indexItem].quantityProduct;
+        });
 
-        arithmetic();
+        //Paramétrage bouton "effacer ligne produit"
+        const deleteItemEl = document.getElementById("deleteitem"+i);
 
-        document.getElementById("totalproduct"+indexItem).innerHTML = loadPrice(sumProductLine[indexItem]);
-        document.getElementById("sumcolumn").innerHTML = loadPrice(cartTotal);
-    
-    });
-}
+        deleteItemEl.addEventListener('click', function() {
+            
+            let tempIndex = tempCart.indexOf(tempCart.find( cart => cart.nameProduct === itemCart.nameProduct));
+
+            document.getElementById("cartlistproducts").removeChild(document.getElementById("lineproduct"+tempIndex));
+            
+            let indexItem = cartContent.indexOf(cartContent.find( cart => cart.nameProduct === itemCart.nameProduct));
+            
+            cartContent.splice(indexItem, 1);
+            
+            let objLinea = JSON.stringify(cartContent);
+            localStorage.setItem("cart", objLinea);
+            
+            if (cartContent.length !== 0) {
+                arithmetic();
+                document.getElementById("sumcolumn").innerHTML = loadPrice(cartTotal);
+            } else {
+               document.getElementById("statut-cart").innerHTML = `Votre panier est vide, consulter notre catalogue...`;
+               document.getElementById("sumcolumn").innerHTML = ``;
+               localStorage.removeItem("cart"); 
+            }
+
+        });
+
+    }
+
 
 
 

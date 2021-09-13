@@ -2,21 +2,21 @@
 // Gestion du Panier
 
 //  Indication header icone "panier vide / panier rempli" 
-        //  fonction utilisée en page index et product
-            function iconCart() {
-                const iconCartEmptyElement = document.getElementById("empty-icon");
-                const iconCartFullElement = document.getElementById("full-icon");
-                const displayEmptyCart = iconCartEmptyElement.classList;
-                const displayFullCart = iconCartFullElement.classList;
+//  fonction utilisée en page index et product
+function iconCart() {
+    const iconCartEmptyElement = document.getElementById("empty-icon");
+    const iconCartFullElement = document.getElementById("full-icon");
+    const displayEmptyCart = iconCartEmptyElement.classList;
+    const displayFullCart = iconCartFullElement.classList;
 
-                if (localStorage.getItem("cart") !== null){
-                displayEmptyCart.add("d-none");
-                displayFullCart.remove("d-none");
-                } else {
-                    displayEmptyCart.remove("d-none");
-                    displayFullCart.add("d-none");
-                }
-            }
+    if (localStorage.getItem("cart") !== null){
+    displayEmptyCart.add("d-none");
+    displayFullCart.remove("d-none");
+    } else {
+        displayEmptyCart.remove("d-none");
+        displayFullCart.add("d-none");
+    }
+}
 
 //  Format des prix
 //  fonction utilisée en page index et product pour l'affichage
@@ -122,9 +122,10 @@ function displayPreviewCart() {
         let clearButtonElement = document.getElementById("clearcart");
 
         clearButtonElement.addEventListener("click", function() {
-            localStorage.clear();
+            localStorage.removeItem("cart");
             iconCart();
             displayPreviewCart();
+            defaultColorOrderButton()
         });
     
     } else {
@@ -133,10 +134,12 @@ function displayPreviewCart() {
     }
 }
 
+
 //  instructions pour calculer le total du panier en page order 
 function arithmetic() {
-  
-    //  Calcul total chaque ligne
+    sumProductLine = [];
+//let cartTotal;  
+  //  Calcul total chaque ligne
     for (let i=0; i < cartContent.length; i++) {
         sumProductLine[i] = (cartContent[i].priceProduct)*(cartContent[i].quantityProduct);
     }

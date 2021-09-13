@@ -46,8 +46,6 @@ addCartElement.addEventListener("click", function() {
     let priceElement = document.getElementById("product-price").textContent;
     let priceStore = parseFloat(priceElement.replace('€', '').replace(/\s/g,''));
 
-
-
     let itemCart = {
         nameProduct : document.getElementById("name").textContent,
         quantityProduct : quantityNumber,
@@ -85,6 +83,7 @@ addCartElement.addEventListener("click", function() {
             localStorage.setItem("cart", objLinea);
             iconCart();
             displayPreviewCart();
+            ColorOrderButton()
         }
     quantityNumber = 1;
     displayQuantity();
@@ -97,3 +96,27 @@ let quantityNumber = 1;
 
 displayQuantity();
 adjustQuantity();
+
+/* Bouton "Commander": Accéder à la page order */
+ColorOrderButton();
+
+let orderButtonElement = document.getElementById("access-order-page");
+
+orderButtonElement.addEventListener('click', function(event) {
+    if (localStorage.getItem("cart") == null) {
+        event.preventDefault()
+    }
+})
+
+function ColorOrderButton() {
+    if (localStorage.getItem("cart") !== null) {
+        document.getElementById("access-order-page").classList.remove("btn-light", "text-secondary");
+        document.getElementById("access-order-page").classList.add("btn-success", "text-light");
+    }
+}
+
+function defaultColorOrderButton() {
+    document.getElementById("access-order-page").classList.remove("btn-success", "text-light");
+    document.getElementById("access-order-page").classList.add("btn-light", "text-secondary");
+    
+}
