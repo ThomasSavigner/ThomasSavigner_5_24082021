@@ -15,14 +15,14 @@ function getAPIproduct() {
 }
 
 function displayCard(product) {
-    let imageElement = document.getElementById("image");
+    let imageElement = document.getElementById("img-product");
     let nameElement = document.getElementById("name");
     let productPriceElement = document.getElementById("product-price");
     let descriptionElement = document.getElementById("description");
     
-    imageElement.src = `${product.imageUrl}`;
-    imageElement.alt += `${product.name}`;
-    nameElement.innerHTML += `${product.name}`;
+    imageElement.innerHTML = `<img id="image" src="${product.imageUrl}" class="img-fluid img-thumbnail image-properties"
+                                alt="Appareil photo vintage ${product.name}">`;
+    nameElement.innerHTML += `<h5 class="card-title">${product.name}</h5>`;
     productPriceElement.innerHTML += `${adaptPrice(product.price)}`;
     descriptionElement.innerHTML += `${product.description}`;
 }
@@ -41,10 +41,15 @@ const addCartElement = document.getElementById("addtocart-button");
 
 addCartElement.addEventListener("click", function() {
     
+    // on récupère le prix affiché comme valeur de variable string au format monétaire
+    // on change du type de string à number
+    let priceElement = document.getElementById("product-price").textContent;
+    let priceStore = parseFloat(priceElement.replace('€', '').replace(/\s/g,''));
+
     let itemCart = {
         nameProduct : document.getElementById("name").textContent,
         quantityProduct : quantityNumber,
-        priceProduct : document.getElementById("product-price").textContent,
+        priceProduct : priceStore,
         imageProduct : document.getElementById("image").src,
         urlProduct : idUrl,
     };
@@ -78,6 +83,7 @@ addCartElement.addEventListener("click", function() {
             localStorage.setItem("cart", objLinea);
             iconCart();
             displayPreviewCart();
+            ColorOrderButton()
         }
     quantityNumber = 1;
     displayQuantity();
@@ -90,3 +96,27 @@ let quantityNumber = 1;
 
 displayQuantity();
 adjustQuantity();
+
+/* Bouton "Commander": Accéder à la page order */
+ColorOrderButton();
+
+let orderButtonElement = document.getElementById("access-order-page");
+
+orderButtonElement.addEventListener('click', function(event) {
+    if (localStorage.getItem("cart") == null) {
+        event.preventDefault()
+    }
+})
+
+function ColorOrderButton() {
+    if (localStorage.getItem("cart") !== null) {
+        document.getElementById("access-order-page").classList.remove("btn-light", "text-secondary");
+        document.getElementById("access-order-page").classList.add("btn-success", "text-light");
+    }
+}
+
+function defaultColorOrderButton() {
+    document.getElementById("access-order-page").classList.remove("btn-success", "text-light");
+    document.getElementById("access-order-page").classList.add("btn-light", "text-secondary");
+    
+}

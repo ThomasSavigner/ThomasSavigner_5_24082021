@@ -2,24 +2,24 @@
 // Gestion du Panier
 
 //  Indication header icone "panier vide / panier rempli" 
-        //  fonction utilisée en page index et product
-            function iconCart() {
-                const iconCartEmptyElement = document.getElementById("empty-icon");
-                const iconCartFullElement = document.getElementById("full-icon");
-                const displayEmptyCart = iconCartEmptyElement.classList;
-                const displayFullCart = iconCartFullElement.classList;
+//  fonction utilisée en page index et product
+function iconCart() {
+    const iconCartEmptyElement = document.getElementById("empty-icon");
+    const iconCartFullElement = document.getElementById("full-icon");
+    const displayEmptyCart = iconCartEmptyElement.classList;
+    const displayFullCart = iconCartFullElement.classList;
 
-                if (localStorage.getItem("cart") !== null){
-                displayEmptyCart.add("d-none");
-                displayFullCart.remove("d-none");
-                } else {
-                    displayEmptyCart.remove("d-none");
-                    displayFullCart.add("d-none");
-                }
-            }
+    if (localStorage.getItem("cart") !== null){
+    displayEmptyCart.add("d-none");
+    displayFullCart.remove("d-none");
+    } else {
+        displayEmptyCart.remove("d-none");
+        displayFullCart.add("d-none");
+    }
+}
 
 //  Format des prix
-//  fonction utilisée en page index et product
+//  fonction utilisée en page index et product pour l'affichage
 function adaptPrice(priceNumber) {
     let price = Intl.NumberFormat("fr-FR", {
             style: "currency",
@@ -28,8 +28,18 @@ function adaptPrice(priceNumber) {
         }).format(`${priceNumber}` / 100);
         return price;
     }
+//fonction utilisée en page order pour l'affichage
+function loadPrice(priceNumber) {
+    let price = Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+    }).format(`${priceNumber}`);
+    return price;
+}
 
-//Définition fonction module "Quantité"
+
+//Définition fonction module "Quantité" page product
     //Affichage de la valeur
     function displayQuantity() {
         const containerQuantity = document.getElementById("quantity-product");
@@ -112,9 +122,10 @@ function displayPreviewCart() {
         let clearButtonElement = document.getElementById("clearcart");
 
         clearButtonElement.addEventListener("click", function() {
-            localStorage.clear();
+            localStorage.removeItem("cart");
             iconCart();
             displayPreviewCart();
+            defaultColorOrderButton()
         });
     
     } else {
@@ -122,3 +133,19 @@ function displayPreviewCart() {
         document.getElementById("preview").classList.remove("d-md-block");
     }
 }
+
+
+//  instructions pour calculer le total du panier en page order 
+function arithmetic() {
+    sumProductLine = [];
+//let cartTotal;  
+  //  Calcul total chaque ligne
+    for (let i=0; i < cartContent.length; i++) {
+        sumProductLine[i] = (cartContent[i].priceProduct)*(cartContent[i].quantityProduct);
+    }
+        
+    //  Total des lignes
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    cartTotal = sumProductLine.reduce(reducer);
+}
+
