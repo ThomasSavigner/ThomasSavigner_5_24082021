@@ -143,6 +143,40 @@ let cartContent = JSON.parse(localStorage.getItem("cart"));
 
     }
 
+// Validation formulaire client
+
+for (let i=1; i < 6; i++) {
+    const inputElement = document.getElementById("input"+i);
+
+    inputElement.addEventListener('input', function() {
+        
+        if (inputElement.checkValidity() == false) {
+            inputElement.classList.remove("is-valid");
+            inputElement.classList.add("is-invalid");
+            
+        } else {
+            inputElement.classList.remove("is-invalid");
+            inputElement.classList.add("is-valid");
+        }
+
+        if (document.getElementById("customerform").checkValidity() == true) {
+            document.getElementById("submitbtn").classList.add("bg-success");
+        } else {
+            document.getElementById("submitbtn").classList.remove("bg-success");
+        }
+
+    })
+}
+
+// Enregistrement de la commande
+document.getElementById("submitbtn").addEventListener('click', function(e){
+    if (document.getElementById("customerform").checkValidity() == false) {
+        e.preventDefault;
+    } else {
+        
+    }
+
+})
 
 
 
