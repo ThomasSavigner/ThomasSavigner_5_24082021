@@ -35,11 +35,46 @@
             <p id="statut-cart" class="mt-3">Voici le contenu de votre panier</p>
           </div>
           <div id="cartlistproducts" class="row mb-3"></div>
-          <div class="d-flex justify-content-end">
-            <div id="sumcolumn"></div>
+          <div class="d-flex justify-content-center border my-3">
+            <p class="my-0">Montant total du panier:</p>
+            <div id="sumcolumn" class="w-25 text-center"></div>
           </div>
         </div>
-      
+
+        <div class="container my-3">
+          <form id="customerform" name="customerdata" class="d-flex flex-column align-items-center border bg-secondary">
+            <legend class="bg-warning text-center py-2">Indiquez vos coordonnées</legend>
+            <p class="form-text text-light mb-0 mx-3 align-self-start">Votre adresse postale pour l'envoi de votre commande...</p>
+            <fieldset class="form-group w-75 d-flex justify-content-start flex-wrap my-3 text-light">
+                <label for="input1" class="w-25 align-self-center">Prénom:</label>
+                <input id="input1" name="firstname" type="text" placeholder="Ex: Patrick" pattern="[A-Za-z ]{1,32}" class="form-control w-75" required>
+                <div class="invalid-feedback text-light">N'utilisez pas de chiffres, ponctuation ni caractères spéciaux</div> 
+            </fieldset>
+            <fieldset class="form-group w-75 d-flex justify-content-start flex-wrap my-3 text-light">
+              <label for="input2" class="w-25 align-self-center">Nom:</label>
+              <input id="input2" name="lastname" type="text" placeholder="Ex: Mcfly" pattern="[A-Za-z ]{1,32}" class="form-control w-75" required>
+              <div class="invalid-feedback text-light">N'utilisez pas de chiffres, ponctuation ni caractères spéciaux</div>
+            </fieldset>
+            <fieldset class="form-group d-flex justify-content-start w-75 flex-wrap my-3 text-light">
+              <label for="input3" class="w-25 align-self-center">Adresse:</label>
+              <input id="input3" name="address" type="text" placeholder="Ex: Main street, 7" pattern="[A-Za-z0-9, _-]{3,32}" class="form-control w-75" required>
+              <div class="invalid-feedback text-light">N'utilisez pas de caractères spéciaux</div>
+            </fieldset>
+            <fieldset class="form-group d-flex justify-content-start flex-wrap w-75 my-3 text-light">
+              <label for="input4" class="w-25 align-self-center">Ville:</label>
+              <input id="input4" name="city" type="text" placeholder="Ex: Boston" pattern="[A-Za-z- ]{1,32}" class="form-control w-75" required>
+              <div class="invalid-feedback text-light">N'utilisez pas de chiffres ni caractères spéciaux</div>
+            </fieldset>
+            <p class="form-text text-light mb-0 mx-3 align-self-start flex-wrap">Votre Email pour vous contacter...</p>
+            <fieldset class="form-group d-flex justify-content-start flex-wrap w-75 my-3 text-light">
+              <label for="input5" class="w-25 align-self-center">Email:</label>
+              <input id="input5" name="email" type="email" placeholder="Ex: pmcfly@turtle.nz" class="form-control w-75" required>
+              <div class="invalid-feedback text-light">Indiquez un email valide</div>
+            </fieldset>
+            <input id="submitbtn" name="submitbtn" type="submit" value="Commandez !" class="my-3 bg-secondary text-light">
+          </form>
+        </div>
+        
       </main>
       
       <footer class="container bg-dark text-light text-center">Orinoco®</footer>
