@@ -143,9 +143,11 @@ let cartContent = JSON.parse(localStorage.getItem("cart"));
 
     }
 
+
 // Validation formulaire client
 
 for (let i=1; i < 6; i++) {
+    
     const inputElement = document.getElementById("input"+i);
 
     inputElement.addEventListener('input', function() {
@@ -168,16 +170,57 @@ for (let i=1; i < 6; i++) {
     })
 }
 
+
 // Enregistrement de la commande
-document.getElementById("submitbtn").addEventListener('click', function(e){
+
+document.getElementById("submitbtn").addEventListener('click', event => {
+
     if (document.getElementById("customerform").checkValidity() == false) {
-        e.preventDefault;
+        
+        event.preventDefault;
+
     } else {
+
+        let contact = {
+                firstName: document.getElementById("input1").value,
+                lastName: document.getElementById("input2").value,
+                address: document.getElementById("input3").value,
+                city: document.getElementById("input4").value,
+                email: document.getElementById("input5").value
+            };        
+
+        let products = [];
+            
+        for (i=0; i<cartContent.length; i++) {
+                
+            for (j=0; j<cartContent[i].quantityProduct; j++){
+
+                let itemProd = cartContent[i].urlProduct;
+                products.push(itemProd);
+
+            }
+
+        }
+        
+        const options = {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({contact, products}),
+            
+        };
+
+        fetch(urlPost, options)
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem("orderId", data.orderId);
+                localStorage.setItem("contact", data.contact);
+                localStorage.setItem("products", data.products);
+                document.location.href = "end-transaction.html";
+            })
+            .catch(error => alert("Erreur : " + error));
         
     }
-
 })
-
-
-
-

@@ -8,3 +8,5 @@ const param = new URLSearchParams(document.location.search.substring(1));
 const idUrl = param.get("_id");
 
 const urlProduct = url + idUrl;
+
+const urlPost = url + "order";

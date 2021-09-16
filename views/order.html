@@ -57,7 +57,7 @@
             </fieldset>
             <fieldset class="form-group d-flex justify-content-start w-75 flex-wrap my-3 text-light">
               <label for="input3" class="w-25 align-self-center">Adresse:</label>
-              <input id="input3" name="address" type="text" placeholder="Ex: Main street, 7" pattern="[A-Za-z0-9, _-]{3,32}" class="form-control w-75" required>
+              <input id="input3" name="address" type="text" placeholder="Ex: Main street, 7" pattern="[A-Za-z0-9, _-]{3,60}" class="form-control w-75" required>
               <div class="invalid-feedback text-light">N'utilisez pas de caractères spéciaux</div>
             </fieldset>
             <fieldset class="form-group d-flex justify-content-start flex-wrap w-75 my-3 text-light">
@@ -71,10 +71,10 @@
               <input id="input5" name="email" type="email" placeholder="Ex: pmcfly@turtle.nz" class="form-control w-75" required>
               <div class="invalid-feedback text-light">Indiquez un email valide</div>
             </fieldset>
-            <input id="submitbtn" name="submitbtn" type="submit" value="Commandez !" class="my-3 bg-secondary text-light">
+            <input id="submitbtn" name="submitbtn" type="button" value="Commandez !" class="my-3 p-3 bg-secondary text-light">
           </form>
         </div>
-        
+
       </main>
       
       <footer class="container bg-dark text-light text-center">Orinoco®</footer>
