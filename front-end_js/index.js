@@ -1,3 +1,4 @@
+/**Script de la page index.html */
 root();
 
 function root() {
@@ -5,7 +6,16 @@ function root() {
     iconCart();
 }
 
+
+/**Requête get sur l'API dont l'url est définie sur settingsAPI.js
+ * La method fetch intègre par défaut la gestion des promesses,
+ * il n'est pas nécessaire d'attacher une nouvelle promesse
+ * Ici, la résolution de la promesse renvoyée par fetch renvoie un objet response au format json
+ * On affiche le contenu de response, qui correspond à l'ensemble des produits à la vente, 
+ * dans le DOM en créant une liste de cartes individuelles avec une boucle
+  */
 function getAPIData() {
+
     fetch(url)
         .then(response => response.json())
         .then(data => displayProducts(data))

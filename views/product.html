@@ -16,7 +16,7 @@
 
       <header class="container sticky-top bg-dark">
         <nav class="navbar navbar-dark">
-          <a class="navbar-brand text-warning" href="#"><span class="material-icons align-bottom">photo_camera</span>&emsp;OriPhoto</a>
+          <a id="brandshop" class="navbar-brand text-warning" href="#"></a>
           <div class="">
             <div class="navbar-nav flex-row">
               <a class="nav-item nav-link active text-warning" href="../index.html"><span class="material-icons">menu_book</span></a>
@@ -36,29 +36,29 @@
             <div class="card-body border border-dark m-1">
                 <div class="d-flex justify-content-between">
                   <div id="name"></div>
-                  <span id="product-price"></span></br>
-                </div></br>
-                <p id="description" class="card-text"></p></br>
+                  <span id="product-price"></span><br>
+                </div><br>
+                <p id="description" class="card-text"></p><br>
             </div>
           </div>
           <div class="col-md-5 h-100">
             <div class="d-flex flex-column justify-content-center h-25 border border-dark mx-1 my-5 p-1">
-              <label for="options" class="text-center">Choississez votre lentille:&emsp;</label>
+              <label for="options" class="text-center">Choisissez votre <span id="custom-option-name"></span>:&emsp;</label>
               <select name="lenses" id="options">
                 <option value="">--- Please select</option>
               </select>
             </div>
             <div class="d-flex flex-column align-items-center border border-dark m-3">
-              </br>
+              <br>
               <div class="mt-3">
                 <span>Quantité:&emsp;</span>
                 <button id="decrement-button" type="button" class="btn btn-success btn-sm border border-muted border-3 hover-shadow shadow" title="diminuer la quantité">-</button>
                 <span id="quantity-product" class="h5 align-middle m-3 p-2 border border-2"></span>
                 <button id="increment-button" type="button" class="btn btn-success btn-sm border border-muted border-3 hover-shadow shadow" title="augmenter la quantité">+</button>
-              </div></br>
+              </div><br>
               <div class="d-flex flex-column m-3">
                   <button type="button" id="addtocart-button" class="btn btn-warning btn-sm border border-dark border-3 hover-shadow shadow"><strong>Ajouter au panier</strong></button>
-                </br>
+                <br>
               </div>
             </div>
             <div class="d-flex justify-content-center align-items-center mx-3 my-5 border border-dark">
@@ -83,7 +83,8 @@
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-      <script src="../front-end_js/settings.js"></script>
+      <script src="../front-end_js/chooseShop.js"></script>
+      <script src="../front-end_js/settingsAPI.js"></script>
       <script src="../front-end_js/cart.js"></script>
       <script src="../front-end_js/product.js"></script>
       

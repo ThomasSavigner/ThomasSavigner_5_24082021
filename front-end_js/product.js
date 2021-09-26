@@ -1,7 +1,15 @@
+// script de la page product.html
+
 displayPreviewCart();
 
 getAPIproduct();
 
+
+/**method fetch avec urlProduct (id en paramètre) renvoie les données sur un produit choisi,
+ * qu'on utilise faire une fiche produit détaillé
+ * La method fetch intègre par défaut la gestion des promesses,
+ * il n'est pas nécessaire d'attacher une nouvelle promesse
+ */
 function getAPIproduct() {
     
     fetch(urlProduct)
@@ -13,7 +21,7 @@ function getAPIproduct() {
             })
         .catch(error => alert("Erreur : " + error));
 }
-
+/** method qui permet de...  */
 function displayCard(product) {
     let imageElement = document.getElementById("img-product");
     let nameElement = document.getElementById("name");
@@ -28,13 +36,69 @@ function displayCard(product) {
 }
 
 function displayOptions(product) {
-    for (lense of product.lenses) {
-        document.getElementById("options").innerHTML += 
-            `<option class="" value="${lense}" name="lense">${lense}</option>`;
+    switch(shop) {
+        case ("teddies"):
+            document.getElementById("custom-option-name").innerHTML = "couleur";
+            for (color of product.colors) {
+                document.getElementById("options").innerHTML += 
+                    `<option class="" value="${color}" name="lense">${color}</option>`;
+            }
+            break;
+        case ("cameras"):
+            document.getElementById("custom-option-name").innerHTML = "lentille";
+            for (lense of product.lenses) {
+                document.getElementById("options").innerHTML += 
+                    `<option class="" value="${lense}" name="lense">${lense}</option>`;
+            }
+            break;
+        case ("furniture"):
+            document.getElementById("custom-option-name").innerHTML = "vernis";
+            for (type of product.varnish) {
+                document.getElementById("options").innerHTML += 
+                    `<option class="" value="${type}" name="lense">${type}</option>`;
+            }
+            break;
+        default:
+            alert("la valeur de la constante shop est erronée sur le script chooseShop.js ");
     }
 }
 
 iconCart()
+
+/*Module Quantité*/
+
+let quantityNumber = 1;
+
+//Affichage de la valeur quantité
+displayQuantity();
+
+function displayQuantity() {
+    const containerQuantity = document.getElementById("quantity-product");
+    containerQuantity.innerHTML = quantityNumber;
+    };
+
+//Ajuster la quantité
+
+    //Paramétrage bouton "-"
+    const lessQuantityBtn = document.getElementById("decrement-button");
+    
+    lessQuantityBtn.addEventListener("click", function() {
+        quantityNumber--;
+
+        if (quantityNumber < 1) {
+            quantityNumber = 1
+        }
+        displayQuantity();
+    });
+
+    //Paramétrage bouton "+"
+    const addQuantityBtn = document.getElementById("increment-button");
+
+    addQuantityBtn.addEventListener("click", function() {
+        quantityNumber++;
+        displayQuantity();
+    });
+
 
 /* Bouton ajouter au panier        */
 const addCartElement = document.getElementById("addtocart-button");
@@ -42,7 +106,7 @@ const addCartElement = document.getElementById("addtocart-button");
 addCartElement.addEventListener("click", function() {
     
     // on récupère le prix affiché comme valeur de variable string au format monétaire
-    // on change du type de string à number
+    // on change le type de string à number
     let priceElement = document.getElementById("product-price").textContent;
     let priceStore = parseFloat(priceElement.replace('€', '').replace(/\s/g,''));
 
@@ -89,13 +153,6 @@ addCartElement.addEventListener("click", function() {
     displayQuantity();
     });
 
-    
-/*Module Quantité*/
-
-let quantityNumber = 1;
-
-displayQuantity();
-adjustQuantity();
 
 /* Bouton "Commander": Accéder à la page order */
 ColorOrderButton();
