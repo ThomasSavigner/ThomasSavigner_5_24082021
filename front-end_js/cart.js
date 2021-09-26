@@ -1,5 +1,5 @@
+// Fonctions pour la gestion du Panier
 
-// Gestion du Panier
 
 //  Indication header icone "panier vide / panier rempli" 
 //  fonction utilisée en page index et product
@@ -36,41 +36,10 @@ function loadPrice(priceNumber) {
         minimumFractionDigits: 2,
     }).format(`${priceNumber}`);
     return price;
-}
-
-
-//Définition fonction module "Quantité" page product
-    //Affichage de la valeur
-    function displayQuantity() {
-        const containerQuantity = document.getElementById("quantity-product");
-        containerQuantity.innerHTML = quantityNumber;
-        };
-
-    //Ajuster la quantité
-    function adjustQuantity() {    
-
-        //Paramétrage bouton "-"
-        const lessQuantityBtn = document.getElementById("decrement-button");
-        
-        lessQuantityBtn.addEventListener("click", function() {
-            let less = quantityNumber--;
-
-            if (quantityNumber < 1) {
-                quantityNumber = 1
-            }
-            displayQuantity();
-        });
-
-        //Paramétrage bouton "+"
-        const addQuantityBtn = document.getElementById("increment-button");
-
-        addQuantityBtn.addEventListener("click", function() {
-            let add = quantityNumber++;
-            displayQuantity();
-        });
-    }
+} 
 
 //  Preview Panier page product
+//  Affichage synthétique (lien-photo avec pastille "quantité")
 function displayPreviewCart() {
     
     const cartElement = document.getElementById("cart");
@@ -138,7 +107,7 @@ function displayPreviewCart() {
 //  instructions pour calculer le total du panier en page order 
 function arithmetic() {
     sumProductLine = [];
-//let cartTotal;  
+ 
   //  Calcul total chaque ligne
     for (let i=0; i < cartContent.length; i++) {
         sumProductLine[i] = (cartContent[i].priceProduct)*(cartContent[i].quantityProduct);
